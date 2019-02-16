@@ -26,26 +26,29 @@ void OutputFile::display()
 {
 	(*m_output) << forcepoint;
 	const CollectedData &data = m_collector->collectedData();
-	for (auto const &display: m_collector->displays()) {
+	if (m_firstLine) {
+		m_time.start();
 		int col = 0;
-		if (m_firstLine) {
-			m_time.start();
+		for (auto const &display: m_collector->displays()) {
 			(*m_output) << "time";
 			for (const QString &sensor: display.sensors()) {
 				(*m_output) << ",\"" << display.name() << "." << sensor << "\"";
 				col++;
 			}
-			col = 0;
-			(*m_output) << "\n";
 			m_firstLine = false;
 		}
-		(*m_output) << double(m_time.elapsed()) / 1000;
+		(*m_output) << "\n";
+	}
+	int col = 0;
+	(*m_output) << double(m_time.elapsed()) / 1000;
+	for (auto const &display: m_collector->displays()) {
 		for (const QString &sensor: display.sensors()) {
 			double value = data[sensor.section('.', 0, 0)][sensor.section('.', 1, 1)] / m_collector->average() * display.scale();
 			(*m_output) << "," << value;
 			col++;
 		}
-		(*m_output) << "\n";
 	}
+	(*m_output) << "\n";
+	m_output->flush();
 }
 
