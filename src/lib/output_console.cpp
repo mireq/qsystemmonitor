@@ -36,7 +36,8 @@ void OutputConsole::display()
 			double value = data[sensor.section('.', 0, 0)][sensor.section('.', 1, 1)] / m_collector->average() * display.scale();
 			m_stdout << sensor << ": " << value << "\t";
 		}
-		m_stdout << "\n\n";
+		m_stdout << "\n";
 		m_stdout.flush();
 	}
+	m_stdout << "\n";
 }
