@@ -10,6 +10,7 @@
 class DisplaySettings
 {
 public:
+	DisplaySettings();
 	explicit DisplaySettings(const QString &name, const Settings &settings);
 	~DisplaySettings();
 

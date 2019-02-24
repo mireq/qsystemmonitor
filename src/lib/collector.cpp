@@ -8,10 +8,13 @@ Collector::Collector(QObject *parent):
 	QObject(parent),
 	m_average(1),
 	m_counter(0),
-	m_samplesLimit(0)
+	m_samplesLimit(0),
+	m_timePerSample(1000)
 {
 	QSettings configuration;
 	m_average = configuration.value("collector/average", 1).toULongLong();
+	int interval = configuration.value("collector/interval", 1000).toInt();
+	m_timePerSample = interval * m_average;
 	const QString sensorPrefix = "sensor-";
 	for (const QString &group: configuration.childGroups()) {
 		if (group.startsWith(sensorPrefix)) {
@@ -46,6 +49,11 @@ Collector::~Collector()
 quint64 Collector::samplesLimit() const
 {
 	return m_samplesLimit;
+}
+
+quint64 Collector::timePerSample() const
+{
+	return m_timePerSample;
 }
 
 void Collector::setSamplesLimit(quint64 limit)

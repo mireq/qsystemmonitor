@@ -23,6 +23,7 @@ public:
 
 	quint64 samplesLimit() const;
 	void setSamplesLimit(quint64 limit);
+	quint64 timePerSample() const;
 
 	void tick();
 	quint64 sampleNumber() const;
@@ -44,6 +45,7 @@ private:
 	QList<QPair<QString, Sensor *>> m_sensors;
 	QList<DisplaySettings> m_displays;
 	CollectedData m_collected;
+	qint64 m_timePerSample;
 }; /* -----  end of class Collector  ----- */
 
 

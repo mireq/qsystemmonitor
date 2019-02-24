@@ -1,6 +1,11 @@
 #include "display.h"
 
 
+DisplaySettings::DisplaySettings():
+	m_scale(1)
+{
+}
+
 DisplaySettings::DisplaySettings(const QString &name, const Settings &settings):
 	m_settings(settings),
 	m_name(name),
