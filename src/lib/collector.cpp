@@ -3,8 +3,6 @@
 #include "collector.h"
 #include "sensor.h"
 
-#include <QDebug>
-
 
 Collector::Collector(QObject *parent):
 	QObject(parent),

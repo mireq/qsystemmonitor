@@ -2,8 +2,6 @@
 
 #include "sensor.h"
 
-#include <QDebug>
-
 
 Sensor::Sensor(const Settings &settings, QObject *parent):
 	QObject(parent),

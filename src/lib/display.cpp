@@ -1,7 +1,5 @@
 #include "display.h"
 
-#include <QDebug>
-
 
 DisplaySettings::DisplaySettings(const QString &name, const Settings &settings):
 	m_settings(settings),
